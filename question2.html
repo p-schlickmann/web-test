@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>questao 2</title>
+    </head>
+    <body>
+        <label for="cpf">
+            CPF
+        </label>
+        <input id="cpf" type="text">
+        <script>
+
+            function isNumeric(str) {
+                if (typeof str != "string") return false // we only process strings!
+                return !isNaN(str) && // use type coercion to parse the _entirety_ of the string (`parseFloat` alone does not do this)...
+                    !isNaN(parseFloat(str)) // ...and ensure strings of whitespace fail
+            }
+
+            const classifyRegion = (cpf) => {
+                if (cpf.length > 12 || !isNumeric(cpf)) {
+                    return 'O CPF informado é inválido.'
+                }
+                if (cpf.length < 9) {
+                    return 'O CPF informado precisa ter ao menos 9 digitos.'
+                }
+                const regions = {
+                    1: 'DF, GO, MT, MS e TO',
+                    2: 'AC, AP, AM, PA, RO e RR',
+                    3: 'CE, MA e PI',
+                    4: 'AL, PB, PE e RN',
+                    5: 'BA e SE',
+                    6: 'MG',
+                    7: 'ES e RJ',
+                    8: 'SP',
+                    9: 'PR e SC',
+                    0: 'RS',
+                }
+                return regions[cpf[8]]
+            }
+
+            const input = document.querySelector('input')
+            input.addEventListener('input', (e) => {
+                let p = document.querySelector('p')
+                if (p) {
+                    p.innerText = classifyRegion(e.target.value)
+                } else {
+                    p = document.createElement('p')
+                    p.innerText = classifyRegion(e.target.value)
+                    document.body.appendChild(p)
+                }
+
+            })
+        </script>
+    </body>
+</html>

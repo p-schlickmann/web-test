@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>questao 1</title>
+        <style>
+
+            body button {
+                width: 200px;
+                height: 200px;
+                border: none;
+                cursor: pointer;
+            }
+
+            #red {
+                background-color: red
+            }
+
+            #yellow {
+                background-color: yellow;
+            }
+
+            #green {
+                background-color: green
+            }
+        </style>
+    </head>
+    <body>
+        <button id="red"></button>
+        <button id="yellow"></button>
+        <button id="green"></button>
+        <script>
+            const clearPreviousImage = () => {
+                const img = document.querySelector('img')
+                if (img) {
+                    document.body.removeChild(img)
+                }
+            }
+
+            const createImage = (color) => {
+                let img = document.createElement('img')
+                img.src = `./images/${color}.png`
+                img.alt = color
+                img.style.display = 'block'
+                document.body.appendChild(img)
+            }
+
+            const red = document.querySelector('#red')
+            const yellow = document.querySelector('#yellow')
+            const green = document.querySelector('#green')
+
+            red.addEventListener("click", () => {
+                clearPreviousImage()
+                createImage('red')
+            })
+
+            yellow.addEventListener("click", () => {
+                clearPreviousImage()
+                createImage('yellow')
+            })
+
+            green.addEventListener("click", () => {
+                clearPreviousImage()
+                createImage('green')
+            })
+
+        </script>
+    </body>
+</html>
